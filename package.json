@@ -9,13 +9,21 @@
     "init:files": "touch README.md index.html sass/style.scss js/script.js",
     "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
     "test": "npm-run-all test:html",
-    "test:html": "html-validate: *.html"
+    "test:html": "html-validate: *.html",
+    "build": "npm-run-all build:* test",
+    "build:sass": "node-sass --output-style compact -o css sass",
+    "build:autoprefixer": "autoprefixer-cli css/style.css",
+    "build-dev": "npm-run-all build-dev:sass build:autoprefixer",
+    "build-dev:sass": "node-sass --output-style expanded --source-map true -o css sass"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer-cli": "^1.0.0",
+    "html-validate": "^3.0.0",
     "mkdirp": "^1.0.4",
+    "node-sass": "^4.14.1",
     "npm-run-all": "^4.1.5"
   }
 }
